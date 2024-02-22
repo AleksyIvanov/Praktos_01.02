@@ -1,40 +1,51 @@
 package com.example.myapplication
 
-import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import com.example.myapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
+    //  @SuppressLint("MissingInflatedId")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        var Likes: ImageButton = findViewById(R.id.imageButton)
         var tekstik: TextView = findViewById(R.id.LikesCount)
-
         var a = tekstik.text.toString().toInt()
         var count = 0
-        Likes.setOnClickListener {
-            count++
-            if (count === 1)
-                a++
-            else {
-                count = 0
-                a--
+
+        val viewModel: PostViewModel by viewModels()
+        viewModel.data.observe(this) { post ->
+            with(binding) {
+                TxtName.text = post.author
+                TxtStatus.text = post.published
+                TxtPost.text = post.content
+                imgLikes.setOnClickListener {
+                    viewModel.like()
+                    count++
+                    tekstik.text = toStringNumb(a)
+                }
+                imgLikes.setImageResource(
+                    if (post.likedByMe){
+                        R.drawable.icons8_heart_24_rounded
+
+                    } else {
+                        R.drawable.icons8_heart_24_outline
+                    }
+                )
+
             }
-
-            tekstik.text = toStringNumb(a)
         }
-
         var Rep: ImageButton = findViewById(R.id.imageButton2)
         var tekstikRep: TextView = findViewById(R.id.RepCount)
-
         var b = tekstikRep.text.toString().toInt()
         var CountRep = 0
-
         Rep.setOnClickListener {
             CountRep++
             if (CountRep === 1)
@@ -43,7 +54,6 @@ class MainActivity : AppCompatActivity() {
                 CountRep = 0
                 b--
             }
-
             tekstikRep.text = toStringNumb(b)
         }
     }
@@ -65,3 +75,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+class PostViewModel : ViewModel() {
+    private val repository: PostRepository = PostRepositoryInMemoryImpl()
+    val data = repository.get()
+    fun like() = repository.like()
+}
+
+
+
+
