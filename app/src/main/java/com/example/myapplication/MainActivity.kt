@@ -5,7 +5,6 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import com.example.myapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,30 +16,26 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         var tekstik: TextView = findViewById(R.id.LikesCount)
-        var a = tekstik.text.toString().toInt()
-        var count = 0
 
         val viewModel: PostViewModel by viewModels()
         viewModel.data.observe(this) { post ->
+
             with(binding) {
                 TxtName.text = post.author
                 TxtStatus.text = post.published
                 TxtPost.text = post.content
-                imgLikes.setOnClickListener {
-                    viewModel.like()
-                    count++
-                    tekstik.text = toStringNumb(a)
-                }
                 imgLikes.setImageResource(
-                    if (post.likedByMe){
+                    if (post.likedByMe)
                         R.drawable.icons8_heart_24_rounded
-
-                    } else {
+                    else
                         R.drawable.icons8_heart_24_outline
-                    }
                 )
+                LikesCount.text=toStringNumb(post.likeCount)
 
             }
+        }
+        binding.imgLikes.setOnClickListener{
+            viewModel.like()
         }
         var Rep: ImageButton = findViewById(R.id.imageButton2)
         var tekstikRep: TextView = findViewById(R.id.RepCount)
@@ -54,31 +49,22 @@ class MainActivity : AppCompatActivity() {
                 CountRep = 0
                 b--
             }
-            tekstikRep.text = toStringNumb(b)
         }
     }
 
     fun toStringNumb(count: Int): String
     {
-        return when(count)
-        {
-            in 0..999 -> {
-                count.toString()
-            }
-            in 1000..<1_000_000 -> {
-                ((count/100).toFloat()/10).toString() + "k"
-            }
-            in 1_000_000..<1_000_000_000 -> {
-                ((count/100000).toFloat()/10).toString() + "M"
-            }
-            else -> "более МЛРД"
+        return when(count){
+            in 0..<1_000 -> count.toString()
+            in 1000..<1_100-> "1K"
+            in 1_100..<10_000 -> ((count/100).toFloat()/10).toString() + "K"
+            in 10_000..<1_000_000 -> (count/1_000).toString() + "K"
+            in 1_000_000..<1_100_000 -> "1M"
+            in 1_100_000..<10_000_000 -> ((count/100_000).toFloat()/10).toString() + "M"
+            in 10_000_000..<1_000_000_000 -> (count/1_000_000).toString() + "M"
+            else -> "more bilion"
         }
     }
-}
-class PostViewModel : ViewModel() {
-    private val repository: PostRepository = PostRepositoryInMemoryImpl()
-    val data = repository.get()
-    fun like() = repository.like()
 }
 
 

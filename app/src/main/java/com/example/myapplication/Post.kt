@@ -5,4 +5,7 @@ data class Post(
     val content: String,
     val published: String,
     val likedByMe: Boolean,
+    var likeCount: Int,
+    val repByMe: Boolean,
+    var repCount: Int
 )
