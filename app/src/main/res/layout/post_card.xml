@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/ImgLogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btpitlogo300"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-1dp" />
+
+    <TextView
+        android:id="@+id/RepCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:text="17"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/imgRepst"
+        app:layout_constraintTop_toBottomOf="@+id/TxtPost"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/white"
+        android:contentDescription="@string/Str"
+        android:src="@drawable/icons8_eye_24"
+        app:layout_constraintEnd_toStartOf="@+id/ViewCount"
+        app:layout_constraintTop_toBottomOf="@+id/TxtPost"
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/TxtStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/white"
+        android:text="21 февраля в 19:12"
+        android:textColor="#757575"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/ImgLogo"
+        app:layout_constraintStart_toEndOf="@id/ImgLogo" />
+
+    <ImageButton
+        android:id="@+id/imgRepst"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/white"
+        android:contentDescription="@string/Str"
+        android:src="@drawable/icons8_share_24"
+        app:layout_constraintStart_toEndOf="@+id/LikesCount"
+        app:layout_constraintTop_toBottomOf="@+id/TxtPost"
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/TxtPost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        android:text="sds"
+        android:textColor="#757575"
+        android:textSize="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/ImgLogo"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="10dp" />
+
+    <TextView
+        android:id="@+id/LikesCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:text="99"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/imgLikes"
+        app:layout_constraintTop_toBottomOf="@+id/TxtPost"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/imgLikes"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/white"
+        android:contentDescription="@string/Str"
+        android:src="@drawable/icons8_heart_24_outline"
+        app:layout_constraintTop_toBottomOf="@+id/TxtPost"
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/TxtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="48dp"
+        android:background="@color/white"
+        android:text="ГПБОУ ВО БТПИТ"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/ImgLogo"
+        app:layout_constraintStart_toEndOf="@id/ImgLogo" />
+
+    <TextView
+        android:id="@+id/ViewCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/white"
+        android:text="1,5k"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TxtPost"
+        tools:ignore="MissingConstraints" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

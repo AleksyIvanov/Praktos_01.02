@@ -1,8 +1,6 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import android.widget.ImageButton
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.ActivityMainBinding
@@ -15,40 +13,13 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var tekstik: TextView = findViewById(R.id.LikesCount)
-
         val viewModel: PostViewModel by viewModels()
-        viewModel.data.observe(this) { post ->
-
-            with(binding) {
-                TxtName.text = post.author
-                TxtStatus.text = post.published
-                TxtPost.text = post.content
-                imgLikes.setImageResource(
-                    if (post.likedByMe)
-                        R.drawable.icons8_heart_24_rounded
-                    else
-                        R.drawable.icons8_heart_24_outline
-                )
-                LikesCount.text=toStringNumb(post.likeCount)
-
-            }
+        val adapter = PostsAdapter {
+            viewModel.like(it.id)
         }
-        binding.imgLikes.setOnClickListener{
-            viewModel.like()
-        }
-        var Rep: ImageButton = findViewById(R.id.imageButton2)
-        var tekstikRep: TextView = findViewById(R.id.RepCount)
-        var b = tekstikRep.text.toString().toInt()
-        var CountRep = 0
-        Rep.setOnClickListener {
-            CountRep++
-            if (CountRep === 1)
-                b++
-            else {
-                CountRep = 0
-                b--
-            }
+        binding.list.adapter = adapter
+        viewModel.data.observe(this) {posts ->
+            adapter.submitList(posts)
         }
     }
 
@@ -66,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
 
 
 
