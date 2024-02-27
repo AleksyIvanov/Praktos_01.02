@@ -6,6 +6,7 @@ interface PostRepository {
     fun getAll(): LiveData<List<Post>>
     fun likeById(id: Int)
     fun repById(Id: Int)
+    fun removeById (Id: Int)
 }
 
 class PostRepositoryInMemoryImpl : PostRepository {
@@ -59,6 +60,11 @@ class PostRepositoryInMemoryImpl : PostRepository {
         posts = posts.map {
             if (it.id != id) it else it.copy(repByMe = !it.repByMe)
         }
+        data.value = posts
+    }
+
+    override fun removeById(id: Int) {
+        posts = posts.filter { it.id != id }
         data.value = posts
     }
 }

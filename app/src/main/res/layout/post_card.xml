@@ -134,5 +134,17 @@
         app:layout_constraintTop_toBottomOf="@+id/TxtPost"
         tools:ignore="MissingConstraints" />
 
+    <ImageButton
+        android:id="@+id/imgMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="56dp"
+        app:layout_constraintBottom_toTopOf="@+id/TxtPost"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/ImgLogo"
+        app:srcCompat="@android:drawable/btn_dialog" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
