@@ -29,13 +29,13 @@ class PostViewHolder (
                     setOnMenuItemClickListener { item ->
                         when (item.itemId) {
                             R.id.remove -> {
-                                onRemoveListener
+                                onRemoveListener(post)
                                 true
                             }
                             else -> false
                         }
                     }
-                }
+                }.show()
             }
         }
     }
