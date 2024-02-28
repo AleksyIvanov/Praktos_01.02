@@ -9,8 +9,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
-        android:layout_width="411dp"
-        android:layout_height="680dp"
+        android:layout_width="414dp"
+        android:layout_height="674dp"
         android:foregroundGravity="top"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,10 +40,11 @@
 
     <ImageButton
         android:id="@+id/imgAdd"
-        android:layout_width="50dp"
-        android:layout_height="48dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:background="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/content"
-        app:srcCompat="@android:drawable/title_bar" />
+        app:srcCompat="@drawable/icons8_upload_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>
