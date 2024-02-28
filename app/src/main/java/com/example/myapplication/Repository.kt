@@ -2,11 +2,14 @@ package com.example.myapplication
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import java.util.Date
+
 interface PostRepository {
     fun getAll(): LiveData<List<Post>>
     fun likeById(id: Int)
     fun repById(Id: Int)
     fun removeById (Id: Int)
+    fun save(post: Post)
 }
 
 class PostRepositoryInMemoryImpl : PostRepository {
@@ -36,6 +39,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             viewCount = 240
         ),
     )
+
+
     private val data = MutableLiveData(posts)
 
     override fun getAll(): LiveData<List<Post>> = data
@@ -46,6 +51,15 @@ class PostRepositoryInMemoryImpl : PostRepository {
         data.value = posts
     }
 
+    fun nextId(post: List<Post>): Int{
+        var id = 1
+        posts.forEach{it1 ->
+            post.forEach{
+                if(it.id == id) id = (it.id+1)
+            }
+        }
+        return id
+    }
     override fun repById(id: Int) {
         posts = posts.map {
             if (it.id != id) it else it.copy(repByMe = !it.repByMe)
@@ -55,6 +69,24 @@ class PostRepositoryInMemoryImpl : PostRepository {
 
     override fun removeById(id: Int) {
         posts = posts.filter { it.id != id }
+        data.value = posts
+    }
+
+    override fun save(post: Post) {
+        if (post.id == 0) {
+            posts = listOf(post.copy(
+                id = nextId(posts),
+                author = "ГПБОУ ВО БТПИТ",
+                likedByMe = false,
+                published = "Сейчас"
+            ))+posts
+            data.value = posts
+            return
+        }
+
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(content = post.content)
+        }
         data.value = posts
     }
 }

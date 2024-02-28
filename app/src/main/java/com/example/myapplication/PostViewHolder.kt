@@ -6,9 +6,9 @@ import com.example.myapplication.databinding.PostCardBinding
 
 class PostViewHolder (
     private val binding: PostCardBinding,
-    private val onLikeListener: OnLikeListener,
-    private val onRemoveListener: OnRemoveListener
+    private val listener: PostsAdapter.Listener
 ) : RecyclerView.ViewHolder(binding.root) {
+
     fun bind(post: Post) {
         binding.apply {
             TxtName.text = post.author
@@ -18,7 +18,10 @@ class PostViewHolder (
             RepCount.text = post.repCount.toString()
             ViewCount.text = post.viewCount.toString()
             imgLikes.setOnClickListener{
-                onLikeListener(post)
+                listener.onLike(post)
+            }
+            imgRepst.setOnClickListener{
+                listener.onRepost(post)
             }
             imgLikes.setImageResource(
                 if (post.likedByMe) R.drawable.icons8_heart_24_rounded else R.drawable.icons8_heart_24_outline
@@ -28,8 +31,12 @@ class PostViewHolder (
                     inflate(R.menu.menu)
                     setOnMenuItemClickListener { item ->
                         when (item.itemId) {
-                            R.id.remove -> {
-                                onRemoveListener(post)
+                            R.id.menuRemove -> {
+                                listener.onRemove(post)
+                                true
+                            }
+                            R.id.menuEdit ->{
+                                listener.onEdit(post)
                                 true
                             }
                             else -> false

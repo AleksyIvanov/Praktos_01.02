@@ -24,17 +24,26 @@
 
     <EditText
         android:id="@+id/content"
-        android:layout_width="372dp"
-        android:layout_height="52dp"
-        android:background="@android:color/black"
+        android:layout_width="361dp"
+        android:layout_height="51dp"
+        android:background="@android:color/darker_gray"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:padding="@dimen/default_gap"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         tools:ignore="LabelFor,MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/imgAdd"
+        android:layout_width="50dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/content"
+        app:srcCompat="@android:drawable/title_bar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
