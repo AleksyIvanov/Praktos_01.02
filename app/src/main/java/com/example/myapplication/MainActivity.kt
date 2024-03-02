@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity(),PostsAdapter.Listener {
                 if (text.isNullOrBlank()) {
                     Toast.makeText(
                         this@MainActivity,
-                        "Содержимое не может быть пустым",
+                        "Ошибка",
                         Toast.LENGTH_SHORT
                     ).show()
                     return@setOnClickListener
@@ -85,6 +86,13 @@ class MainActivity : AppCompatActivity(),PostsAdapter.Listener {
 
     override fun onRepost(post: Post) {
         viewModel.repById(post.id)
+        val intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT,post.content)
+            type = "text/plain"
+        }
+        val shareIntent = Intent.createChooser(intent,"Поделитьс с прилоежниями ")
+        startActivity(shareIntent)
     }
 }
 
